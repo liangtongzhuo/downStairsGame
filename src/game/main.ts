@@ -1,21 +1,19 @@
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const a = 11;
-console.log(a);
-// let ctx = canvas.getContext("2d");
+import Man from "./player/man";
 
 /**
  * 游戏主函数
  */
 export default class Main {
-  // constructor() {
+  private canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  private ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
-  // }
+  private man = new Man();
 
   // 开始
   public start() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+
     this.loop();
   }
 
@@ -35,16 +33,18 @@ export default class Main {
   // }
 
   /**
+   * 更新数据状态
+   */
+  private update() {
+    // console.log("666");
+  }
+  /**
    * canvas重绘函数
    * 每一帧重新绘制所有的需要展示的元素
    */
   private render() {
-    console.log("666");
-  }
-
-  // 游戏逻辑更新主函数
-  private update() {
-    // console.log("666");
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.man.drawToCanvas(this.ctx);
   }
 
   // 实现游戏帧循环
