@@ -2,30 +2,27 @@
  * 游戏基础的精灵类
  */
 export default class Sprite {
-  public visible: boolean;
+  public visible = true;
+  // 剪切位置
+  public sx: number;
+  public sy: number;
+  // 控制切出来的大小
+  public swidth: number;
+  public sheight: number;
+  
+  // 画布上位置
+  public x = 0;
+  public y = 0;
+  // 要使用的宽高
+  public width: number;
+  public height: number;
+
   private img = new Image() as HTMLImageElement;
-  private width: number;
-  private height: number;
-  private x: number;
-  private y: number;
 
-  constructor(
-    imgSrc = "",
-    width = 0,
-    height = 0,
-    x = 0,
-    y = 0,
-    visible = true
-  ) {
+  constructor(imgSrc = "", swidth = 0, sheight = 0) {
     this.img.src = imgSrc;
-
-    this.width = width;
-    this.height = height;
-
-    this.x = x;
-    this.y = y;
-
-    this.visible = visible;
+    this.swidth = swidth;
+    this.sheight = sheight;
   }
 
   /**
@@ -35,7 +32,20 @@ export default class Sprite {
     if (!this.visible) {
       return;
     }
-
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    if (this.sx || this.sx === 0) {
+      ctx.drawImage(
+        this.img,
+        this.sx,
+        this.sy,
+        this.swidth,
+        this.sheight,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    } else {
+      ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
   }
 }

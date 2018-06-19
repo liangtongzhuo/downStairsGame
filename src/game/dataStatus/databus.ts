@@ -3,6 +3,7 @@
  */
 export default class DataBus {
   private static instance = new DataBus();
+  
   constructor() {
     return DataBus.instance;
   }

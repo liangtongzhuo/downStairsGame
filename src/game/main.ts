@@ -1,3 +1,4 @@
+// import Databus from "./dataStatus/databus";
 import Man from "./player/man";
 
 /**
@@ -6,13 +7,18 @@ import Man from "./player/man";
 export default class Main {
   private canvas = document.getElementById("canvas") as HTMLCanvasElement;
   private ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-
+  // 自己人物
   private man = new Man();
+  // private databus = new Databus();
 
   // 开始
   public start() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
+
+    this.canvas.addEventListener("touchstart", this.touchstart.bind(this));
+    this.canvas.addEventListener("touchmove", this.touchmove.bind(this));
+    this.canvas.addEventListener("touchend", this.touchend.bind(this));
 
     this.loop();
   }
@@ -27,16 +33,38 @@ export default class Main {
   //   console.log(666)
   // }
 
-  // 游戏结束后的触摸事件处理逻辑
-  // private touchEventHandler(e: TouchEvent) {
-  //   e.preventDefault();
-  // }
+  /**
+   * 点击接触调用
+   */
+  private touchstart(e: TouchEvent) {
+    e.preventDefault();
+    const { clientX, clientY } = e.touches[0];
+    console.log(clientX, clientY);
+  }
+  /**
+   * 点击之后滑动持续调用
+   */
+  private touchmove(e: TouchEvent) {
+    e.preventDefault();
+    const { clientX, clientY } = e.touches[0];
+    console.log(clientX, clientY);
+  }
+
+  /**
+   * 手抬起来会调用
+   */
+  private touchend(e: TouchEvent) {
+    e.preventDefault();
+    const { clientX, clientY } = e.changedTouches[0];
+    console.log(clientX, clientY);
+  }
 
   /**
    * 更新数据状态
    */
   private update() {
     // console.log("666");
+    this.man.update();
   }
   /**
    * canvas重绘函数
