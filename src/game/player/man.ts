@@ -1,6 +1,6 @@
 import Sprite from "../base/sprite";
 
-// 玩家相关常量设置
+// 玩家相关常量设置 
 const MAN_IMG_SRC = "./img/man.png";
 
 const MAN_WIDTH = 64;
@@ -23,10 +23,10 @@ export default class Man extends Sprite {
     this.frame %= 21;
 
     if (this.frame === 10) {
-      this.sx = 3 * MAN_WIDTH;
+      this.sx = 5 * MAN_WIDTH;
     }
     if (this.frame === 20) {
-      this.sx = 4 * MAN_WIDTH;
+      this.sx = 6 * MAN_WIDTH;
     }
   }
   /**
