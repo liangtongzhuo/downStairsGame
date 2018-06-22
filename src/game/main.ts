@@ -1,4 +1,4 @@
-// import Databus from "./dataStatus/databus";
+import Databus from "./dataStatus/databus";
 import Man from "./player/man";
 
 /**
@@ -7,9 +7,10 @@ import Man from "./player/man";
 export default class Main {
   private canvas = document.getElementById("canvas") as HTMLCanvasElement;
   private ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+
   // 自己人物
   private man = new Man();
-  // private databus = new Databus();
+  private databus = new Databus();
 
   // 开始
   public start() {
@@ -47,7 +48,12 @@ export default class Main {
   private touchmove(e: TouchEvent) {
     e.preventDefault();
     const { clientX, clientY } = e.touches[0];
-    console.log(clientX, clientY);
+    if (clientX < window.innerWidth/2) {
+      this.databus.direction = 1
+    }else {
+      this.databus.direction = 3
+    }
+    console.log(clientX, clientY, this.databus.direction);
   }
 
   /**
@@ -56,6 +62,7 @@ export default class Main {
   private touchend(e: TouchEvent) {
     e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
+
     console.log(clientX, clientY);
   }
 
