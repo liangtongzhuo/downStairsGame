@@ -62,7 +62,6 @@ export default class Main {
   private touchend(e: TouchEvent) {
     e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
-
     console.log(clientX, clientY);
   }
 
