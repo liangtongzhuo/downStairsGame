@@ -13,7 +13,7 @@ enum Direction {
 export default class DataBus {
   private static instance = new DataBus();
   public pool = new Pool();
-  public floors: Floor[];
+  public floors: Floor[] = [];
   public man = {
     direction: Direction.Left
   };
@@ -23,10 +23,14 @@ export default class DataBus {
   }
 
   /**
-   * 边界判断回收 floor 进入对象池
-   * 此后不进入帧循环
+   * 总数据找出对象，加入缓存池
    */
-  public removeFloor() {
-    //
+  public removeFloor(floor: Floor) {
+    this.floors.forEach((item, index) => {
+      if (item === floor) {
+        this.floors.splice(index, 1);
+        this.pool.recover("Floor", floor);
+      }
+    });
   }
 }

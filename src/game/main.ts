@@ -1,7 +1,6 @@
-import Databus from "./dataStatus/databus";
+import DataBus from "./dataStatus/databus";
 import Floor from "./player/floor";
 import Man from "./player/man";
-
 
 /**
  * 游戏主函数
@@ -11,9 +10,8 @@ export default class Main {
   private ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
   // 自己人物
-  private dataBus = new Databus();
+  private dataBus = new DataBus();
   private man = new Man();
-  private floor = new Floor();
 
   // 开始
   public start() {
@@ -72,8 +70,8 @@ export default class Main {
    * 更新数据状态
    */
   private update() {
+    this.dataBus.floors.forEach(floor => floor.update());
     this.man.update();
-    // this.floor.update();
   }
   /**
    * canvas重绘函数
@@ -81,14 +79,24 @@ export default class Main {
    */
   private render() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.dataBus.floors.forEach(floor => floor.drawToCanvas(this.ctx));
     this.man.drawToCanvas(this.ctx);
-    this.floor.drawToCanvas(this.ctx);
   }
 
   // 实现游戏帧循环
   private loop() {
+    this.dataBus.frame++;
+
     this.update();
     this.render();
+
+    // 随机生成地图
+    if (this.dataBus.frame % 20 === 0) {
+      // 缓存里面取
+      const floor = this.dataBus.pool.getItemByClass<Floor>("Floor", Floor);
+      floor.init(Math.random() * 100, Math.random() * 100, 0);
+      this.dataBus.floors.push(floor);
+    }
 
     window.requestAnimationFrame(this.loop.bind(this));
   }
