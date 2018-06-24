@@ -10,8 +10,9 @@ enum Direction {
 }
 export default class DataBus {
   private static instance = new DataBus();
-  // 方向
-  public direction = Direction.Left;
+  public man = {
+    direction: Direction.Left
+  };
   constructor() {
     return DataBus.instance;
   }
