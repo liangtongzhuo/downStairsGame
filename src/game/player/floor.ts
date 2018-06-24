@@ -1,16 +1,16 @@
 import Sprite from "../base/sprite";
 // import DataBus from "../dataStatus/databus";
-// 玩家相关常量设置
-const MAN_IMG_SRC = "./img/floor.png";
+// 相关常量设置
+const IMG_SRC = "./img/floor.png";
 // 剪切的宽高
-const MAN_WIDTH = 200;
-const MAN_HEIGHT = 32;
+const WIDTH = 200;
+const HEIGHT = 32;
 
-export default class Man extends Sprite {
+export default class Floor extends Sprite {
   public frame = 0;
   // private dataBus = new DataBus();
   constructor() {
-    super(MAN_IMG_SRC, MAN_WIDTH, MAN_HEIGHT);
+    super(IMG_SRC, WIDTH, HEIGHT);
     // 动画剪切位置
     this.sx = 0;
     this.sy = 0;
@@ -21,6 +21,14 @@ export default class Man extends Sprite {
     this.x = 0;
     this.y = 0;
   }
+  
+  // 初始值
+  public init(x = 0, y = 0, type = 0) {
+    this.x = x;
+    this.y = y;
+    console.log(x, y, type);
+  }
+
   // 更新动画
   public update() {
     this.frame += 1;
