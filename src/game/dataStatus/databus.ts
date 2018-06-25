@@ -5,17 +5,20 @@ import Floor from "../player/floor";
 import Pool from "./pool";
 
 enum Direction {
-  Up = 0,
-  Down,
+  Top = 0,
   Left,
-  Right
+  Right,
+  Down,
+  Stand
 }
+
 export default class DataBus {
   private static instance = new DataBus();
   public pool = new Pool();
   public floors: Floor[] = [];
   public man = {
-    direction: Direction.Left
+    horizontal: Direction.Stand,
+    vertical: Direction.Down
   };
   public frame = 0;
   constructor() {

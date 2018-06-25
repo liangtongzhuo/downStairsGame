@@ -30,7 +30,7 @@ export default class Floor extends Sprite {
 
   // 更新动画
   public update() {
-    this.y++;
+    this.y--;
 
     this.removeFloor();
   }
@@ -38,7 +38,7 @@ export default class Floor extends Sprite {
   // 判断边界是否进入对象池
   private removeFloor() {
     // 判断是否出屏幕
-    if (this.y > window.innerHeight + this.height) {
+    if (this.y < -this.height) {
       this.visible = false;
       this.dataBus.removeFloor(this);
     }

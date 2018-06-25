@@ -30,11 +30,6 @@ export default class Main {
   //   console.log(666)
   // }
 
-  // 全局碰撞检测
-  // private collisionDetection() {
-  //   console.log(666)
-  // }
-
   /**
    * 点击接触调用
    */
@@ -50,11 +45,11 @@ export default class Main {
     e.preventDefault();
     const { clientX, clientY } = e.touches[0];
     if (clientX < window.innerWidth / 2) {
-      this.dataBus.man.direction = 1;
+      this.dataBus.man.horizontal = 2;
     } else {
-      this.dataBus.man.direction = 3;
+      this.dataBus.man.horizontal = 3;
     }
-    console.log(clientX, clientY, this.dataBus.man.direction);
+    console.log(clientX, clientY);
   }
 
   /**
@@ -67,12 +62,25 @@ export default class Main {
   }
 
   /**
+   * 碰撞检测
+   */
+  private collisionDetection() {
+    this.dataBus.floors.forEach(floor => {
+      if (this.man.collisionDetectionFloor(floor)) {
+        this.dataBus.man.vertical = 4;
+      }
+    });
+  }
+
+  /**
    * 更新数据状态
    */
   private update() {
     this.dataBus.floors.forEach(floor => floor.update());
     this.man.update();
+    this.collisionDetection();
   }
+
   /**
    * canvas重绘函数
    * 每一帧重新绘制所有的需要展示的元素
@@ -91,10 +99,14 @@ export default class Main {
     this.render();
 
     // 随机生成地图
-    if (this.dataBus.frame % 20 === 0) {
+    if (this.dataBus.frame % 50 === 0) {
       // 缓存里面取
       const floor = this.dataBus.pool.getItemByClass<Floor>("Floor", Floor);
-      floor.init(Math.random() * 100, Math.random() * 100, 0);
+      floor.init(
+        Math.random() * (window.innerWidth - floor.width),
+        window.innerHeight,
+        0
+      );
       this.dataBus.floors.push(floor);
     }
 

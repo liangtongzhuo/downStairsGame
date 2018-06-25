@@ -2,3 +2,8 @@
   visibility: hidden;
   display: none;
 }
+
+#canvas {
+  background-color: #9dd9ed;
+  background: linear-gradient(to bottom, #019cf5, #bfeefd);
+}
