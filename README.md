@@ -19,6 +19,7 @@ npm run start
 
 - Floor position creation
 - Map rolling
+- Delayed action
 - Floor style
 - The person collides with the floor
 - Networking follow-up
