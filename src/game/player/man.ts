@@ -11,8 +11,10 @@ const HEIGHT = 64;
 export default class Man extends Sprite {
   public frame = 0;
   private dataBus = new DataBus();
-  private xSpeed = 4;
+  private xSpeed = 3;
   private ySpeed = 2;
+  // 暂持存储状态，强制更新画面用
+  private horizontalStatus = 0;
 
   constructor() {
     super(IMG_SRC, WIDTH, HEIGHT);
@@ -55,18 +57,23 @@ export default class Man extends Sprite {
    * 水平移动
    */
   private horizontal() {
+    // 更新状态瞬间刷新界面
+    if(this.horizontalStatus !== this.dataBus.man.horizontal){
+      if(this.dataBus.man.horizontal === 2) this.sx = 3 * WIDTH;
+      if(this.dataBus.man.horizontal === 3) this.sx = 5 * WIDTH;
+    }
+    this.horizontalStatus = this.dataBus.man.horizontal;
+
     if (this.dataBus.man.horizontal === 2) {
       if (this.x > 0) this.x -= this.xSpeed;
       if (this.frame === 10) this.sx = 3 * WIDTH;
       if (this.frame === 20) this.sx = 4 * WIDTH;
     } else if (this.dataBus.man.horizontal === 3) {
-      if (this.x < window.innerWidth - this.width) {
-        this.x += this.xSpeed;
-      }
-
+      if (this.x < window.innerWidth - this.width) this.x += this.xSpeed;
       if (this.frame === 10) this.sx = 5 * WIDTH;
       if (this.frame === 20) this.sx = 6 * WIDTH;
     }
+
   }
   /**
    * 上下移动
