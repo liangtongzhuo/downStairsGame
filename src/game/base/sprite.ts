@@ -9,7 +9,6 @@ export default class Sprite {
   // 控制切出来的大小
   public swidth: number;
   public sheight: number;
-
   // 画布上位置
   public x = 0;
   public y = 0;

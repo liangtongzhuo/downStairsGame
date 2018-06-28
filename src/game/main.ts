@@ -38,17 +38,13 @@ export default class Main {
     const { clientX, clientY } = e.touches[0];
     console.log(clientX, clientY);
   }
+  
   /**
    * 点击之后滑动持续调用
    */
   private touchmove(e: TouchEvent) {
     e.preventDefault();
     const { clientX, clientY } = e.touches[0];
-    if (clientX < window.innerWidth / 2) {
-      this.dataBus.man.horizontal = 2;
-    } else {
-      this.dataBus.man.horizontal = 3;
-    }
     console.log(clientX, clientY);
   }
 
@@ -58,6 +54,11 @@ export default class Main {
   private touchend(e: TouchEvent) {
     e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
+    if (clientX < window.innerWidth / 2) {
+      this.dataBus.man.horizontal = 2;
+    } else {
+      this.dataBus.man.horizontal = 3;
+    }
     console.log(clientX, clientY);
   }
 
@@ -98,7 +99,7 @@ export default class Main {
     this.update();
     this.render();
 
-    // 随机生成地图
+    // 随机生成地板
     if (this.dataBus.frame % 50 === 0) {
       // 缓存里面取
       const floor = this.dataBus.pool.getItemByClass<Floor>("Floor", Floor);
