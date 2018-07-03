@@ -109,7 +109,7 @@ export default class Main {
       floor.init(
         Math.random() * (BaseTool.width - floor.width),
         BaseTool.height,
-        0
+        1
       );
       this.dataBus.floors.push(floor);
     }

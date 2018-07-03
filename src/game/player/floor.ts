@@ -26,6 +26,9 @@ export default class Floor extends Sprite {
     this.visible = true;
     this.x = x;
     this.y = y;
+
+    if (type === 0) this.sy = 0;
+    if (type === 1) this.sy = 32;
   }
 
   // 更新动画
