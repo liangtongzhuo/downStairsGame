@@ -31,16 +31,15 @@ export default class Floor extends Sprite {
   // 更新动画
   public update() {
     this.y--;
-
-    this.removeFloor();
+    this.judgeAddPool();
   }
 
   // 判断边界是否进入对象池
-  private removeFloor() {
+  private judgeAddPool() {
     // 判断是否出屏幕
     if (this.y < -this.height) {
       this.visible = false;
-      this.dataBus.removeFloor(this);
+      this.dataBus.floorAddPool(this);
     }
   }
 }

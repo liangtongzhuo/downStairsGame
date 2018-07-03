@@ -9,8 +9,8 @@ export default class Main {
   private canvas = document.getElementById("canvas") as HTMLCanvasElement;
   private ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
-  // 自己人物
   private dataBus = new DataBus();
+  // 自己人物
   private man = new Man();
 
   // 开始
@@ -25,10 +25,12 @@ export default class Main {
     this.loop();
   }
 
-  // 重新开始
-  // private restart() {
-  //   console.log(666)
-  // }
+  /**
+   * 重新开始
+   */
+  public restart() {
+    console.log("重新开始");
+  }
 
   /**
    * 点击接触调用
@@ -38,7 +40,7 @@ export default class Main {
     const { clientX, clientY } = e.touches[0];
     console.log(clientX, clientY);
   }
-  
+
   /**
    * 点击之后滑动持续调用
    */

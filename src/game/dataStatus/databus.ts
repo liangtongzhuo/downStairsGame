@@ -28,7 +28,7 @@ export default class DataBus {
   /**
    * 总数据找出对象，加入缓存池
    */
-  public removeFloor(floor: Floor) {
+  public floorAddPool(floor: Floor) {
     this.floors.forEach((item, index) => {
       if (item === floor) {
         this.floors.splice(index, 1);

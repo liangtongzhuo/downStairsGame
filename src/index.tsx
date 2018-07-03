@@ -5,7 +5,7 @@ import App from "./react/App";
 import "./react/index.css";
 ReactDOM.render(<App />, document.getElementById("root") as HTMLElement);
 
-// 加载 canvas 绘制游戏
+// 加载 canvas 渲染游戏
 import Game from "./game/main";
 const game = new Game();
 game.start();
