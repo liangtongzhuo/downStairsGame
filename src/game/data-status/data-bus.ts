@@ -1,16 +1,10 @@
 /**
  * 全局状态管理器，单例
  */
+import { Direction } from "../base/base-tool";
 import Floor from "../player/floor";
 import Pool from "./pool";
 
-enum Direction {
-  Top = 0,
-  Left,
-  Right,
-  Down,
-  Stand
-}
 
 export default class DataBus {
   private static instance = new DataBus();

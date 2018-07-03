@@ -1,5 +1,5 @@
 import Sprite from "../base/sprite";
-import DataBus from "../dataStatus/databus";
+import DataBus from "../data-status/data-bus";
 // 相关常量设置
 const IMG_SRC = "./img/floor.png";
 // 剪切的宽高

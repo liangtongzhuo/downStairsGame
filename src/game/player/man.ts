@@ -1,5 +1,5 @@
 import Sprite from "../base/sprite";
-import DataBus from "../dataStatus/databus";
+import DataBus from "../data-status/data-bus";
 import Floor from "./floor";
 
 // 相关常量设置

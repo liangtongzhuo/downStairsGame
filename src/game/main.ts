@@ -1,4 +1,4 @@
-import DataBus from "./dataStatus/databus";
+import DataBus from "./data-status/data-bus";
 import Floor from "./player/floor";
 import Man from "./player/man";
 
@@ -112,7 +112,7 @@ export default class Main {
       );
       this.dataBus.floors.push(floor);
     }
-
+   
     window.requestAnimationFrame(this.loop.bind(this));
   }
 }
