@@ -1,3 +1,4 @@
+import { BaseTool, Direction, RequestAnimationFrame } from "./base/base-tool";
 import DataBus from "./data-status/data-bus";
 import Floor from "./player/floor";
 import Man from "./player/man";
@@ -15,8 +16,8 @@ export default class Main {
 
   // 开始
   public start() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    this.canvas.width = BaseTool.width;
+    this.canvas.height = BaseTool.height;
 
     this.canvas.addEventListener("touchstart", this.touchstart.bind(this));
     this.canvas.addEventListener("touchmove", this.touchmove.bind(this));
@@ -56,10 +57,10 @@ export default class Main {
   private touchend(e: TouchEvent) {
     e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
-    if (clientX < window.innerWidth / 2) {
-      this.dataBus.man.horizontal = 2;
+    if (clientX < BaseTool.width / 2) {
+      this.dataBus.man.horizontal = Direction.Left;
     } else {
-      this.dataBus.man.horizontal = 3;
+      this.dataBus.man.horizontal = Direction.Right;
     }
     console.log(clientX, clientY);
   }
@@ -70,7 +71,7 @@ export default class Main {
   private collisionDetection() {
     this.dataBus.floors.forEach(floor => {
       if (this.man.collisionDetectionFloor(floor)) {
-        this.dataBus.man.vertical = 4;
+        this.dataBus.man.vertical = Direction.Stand;
       }
     });
   }
@@ -106,13 +107,13 @@ export default class Main {
       // 缓存里面取
       const floor = this.dataBus.pool.getItemByClass<Floor>("Floor", Floor);
       floor.init(
-        Math.random() * (window.innerWidth - floor.width),
-        window.innerHeight,
+        Math.random() * (BaseTool.width - floor.width),
+        BaseTool.height,
         0
       );
       this.dataBus.floors.push(floor);
     }
-   
-    window.requestAnimationFrame(this.loop.bind(this));
+
+    RequestAnimationFrame(this.loop.bind(this));
   }
 }
