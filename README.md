@@ -19,7 +19,9 @@ npm run dev
 
 - Floor position creation
 - Map rolling
-- Delayed action
+- Delayed action BUG
 - Floor style
 - The person collides with the floor
 - Networking follow-up
+- Map pre-generation
+- Loading the floor according to time
