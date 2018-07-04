@@ -1,5 +1,6 @@
 import { BaseTool, Direction, RequestAnimationFrame } from "./base/base-tool";
 import DataBus from "./data-status/data-bus";
+import "./data-status/websocket";
 import Floor from "./player/floor";
 import Man from "./player/man";
 
