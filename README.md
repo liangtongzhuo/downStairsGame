@@ -17,8 +17,8 @@ npm run dev
 
 # todo
 
-- Floor position creation
-- Map rolling
+ * [x] Floor position creation
+ * [x] Map rolling
 - Delayed action BUG
 - Floor style
 - The person collides with the floor
