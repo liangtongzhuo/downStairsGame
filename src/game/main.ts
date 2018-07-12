@@ -1,8 +1,7 @@
 import { BaseTool, Direction, RequestAnimationFrame } from "./base/base-tool";
 import DataBus from "./data-status/data-bus";
-import "./data-status/websocket";
-import Floor from "./player/floor";
 import Man from "./player/man";
+import "./websocket";
 
 /**
  * 游戏主函数
@@ -102,18 +101,6 @@ export default class Main {
 
     this.update();
     this.render();
-
-    // 随机生成地板
-    if (this.dataBus.frame % 50 === 0) {
-      // 缓存里面取
-      const floor = this.dataBus.pool.getItemByClass<Floor>("Floor", Floor);
-      floor.init(
-        Math.random() * (BaseTool.width - floor.width),
-        BaseTool.height,
-        1
-      );
-      this.dataBus.floors.push(floor);
-    }
 
     RequestAnimationFrame(this.loop.bind(this));
   }
