@@ -38,8 +38,8 @@ export default class Main {
    */
   private touchstart(e: TouchEvent) {
     e.preventDefault();
-    const { clientX, clientY } = e.touches[0];
-    console.log(clientX, clientY);
+    // const { clientX, clientY } = e.touches[0];
+    // console.log(clientX, clientY);
   }
 
   /**
@@ -47,8 +47,8 @@ export default class Main {
    */
   private touchmove(e: TouchEvent) {
     e.preventDefault();
-    const { clientX, clientY } = e.touches[0];
-    console.log(clientX, clientY);
+    // const { clientX, clientY } = e.touches[0];
+    // console.log(clientX, clientY);
   }
 
   /**
@@ -56,13 +56,13 @@ export default class Main {
    */
   private touchend(e: TouchEvent) {
     e.preventDefault();
-    const { clientX, clientY } = e.changedTouches[0];
+    const { clientX } = e.changedTouches[0];
     if (clientX < BaseTool.width / 2) {
       this.dataBus.man.horizontal = Direction.Left;
     } else {
       this.dataBus.man.horizontal = Direction.Right;
     }
-    console.log(clientX, clientY);
+    // console.log(clientX, clientY);
   }
 
   /**
@@ -77,10 +77,20 @@ export default class Main {
   }
 
   /**
+   * 根据服务器数据生成显示对象
+   */
+  private create() {
+    const currentDate = Date.now();
+    this.dataBus.netDataFloors.forEach(dataFloor => {
+      dataFloor.createShow(this.dataBus, currentDate);
+    });
+  }
+
+  /**
    * 更新数据状态
    */
   private update() {
-    this.dataBus.floors.forEach(floor => floor.update());
+    this.dataBus.floors.forEach(floor => floor.update(this.dataBus));
     this.man.update();
     this.collisionDetection();
   }
@@ -99,6 +109,7 @@ export default class Main {
   private loop() {
     this.dataBus.frame++;
 
+    this.create();
     this.update();
     this.render();
 

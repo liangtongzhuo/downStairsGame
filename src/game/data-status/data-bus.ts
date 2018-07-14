@@ -2,9 +2,9 @@
  * 全局状态管理器，单例
  */
 import { Direction } from "../base/base-tool";
+import FloorModel from "../model/floor-model";
 import Floor from "../player/floor";
 import Pool from "./pool";
-
 
 export default class DataBus {
   private static instance = new DataBus();
@@ -15,6 +15,9 @@ export default class DataBus {
     vertical: Direction.Down
   };
   public frame = 0;
+  // 网络数据
+  public netDataFloors: FloorModel[] = [];
+
   constructor() {
     return DataBus.instance;
   }

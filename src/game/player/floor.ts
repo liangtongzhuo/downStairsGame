@@ -7,7 +7,6 @@ const WIDTH = 200;
 const HEIGHT = 32;
 
 export default class Floor extends Sprite {
-  private dataBus = new DataBus();
   constructor() {
     super(IMG_SRC, WIDTH, HEIGHT);
     // 动画剪切位置
@@ -32,17 +31,17 @@ export default class Floor extends Sprite {
   }
 
   // 更新动画
-  public update() {
+  public update(dataBus:DataBus) {
     this.y--;
-    this.judgeAddPool();
+    this.judgeAddPool(dataBus);
   }
 
   // 判断边界是否进入对象池
-  private judgeAddPool() {
+  private judgeAddPool(dataBus:DataBus) {
     // 判断是否出屏幕
     if (this.y < -this.height) {
       this.visible = false;
-      this.dataBus.floorAddPool(this);
+      dataBus.floorAddPool(this);
     }
   }
 }

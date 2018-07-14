@@ -2,15 +2,16 @@
  *
  * websocket
  */
-import { BaseTool } from "../base/base-tool";
 import DataBus from "../data-status/data-bus";
-import Floor from "../player/floor";
+import FloorModel from "../model/floor-model";
 
 const dataBus = new DataBus();
 const ws = new WebSocket("ws://localhost:3002");
 
 ws.onopen = e => {
   console.log("open:", e);
+  // 向服务器发送状态
+  ws.send(JSON.stringify({ mesName: "initMap" }));
 };
 
 /**
@@ -21,16 +22,11 @@ ws.onmessage = e => {
   if (!e.data) return;
   const data: any = JSON.parse(e.data);
 
-  // 缓存里面取
-  const floor = dataBus.pool.getItemByClass<Floor>("Floor", Floor);
-  floor.init(
-    data.widthRandom * (BaseTool.width - floor.width),
-    BaseTool.height,
-    1
-  );
-  dataBus.floors.push(floor);
-
-  console.log(data);
+  // 收到地图初始化，转换成模型储存
+  if (data.mesName === "initMap") {
+    dataBus.netDataFloors = FloorModel.init(data.floors);
+    return;
+  }
 };
 
 ws.onclose = e => {
@@ -40,8 +36,3 @@ ws.onclose = e => {
 ws.onerror = e => {
   console.error("error:", e);
 };
-
-// 向服务器发送状态
-// setInterval(() => {
-//   ws.send(JSON.stringify({ aaa: 666 }));
-// }, 1000);
