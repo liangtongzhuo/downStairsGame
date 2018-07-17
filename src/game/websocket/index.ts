@@ -6,7 +6,7 @@ import DataBus from "../data-status/data-bus";
 import FloorModel from "../model/floor-model";
 
 const dataBus = new DataBus();
-const ws = new WebSocket("ws://localhost:3002");
+const ws = new WebSocket("ws://localhost:3002?userId=" + Date.now());
 
 ws.onopen = e => {
   console.log("open:", e);
