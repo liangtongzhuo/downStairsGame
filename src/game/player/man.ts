@@ -39,6 +39,8 @@ export default class Man extends Sprite {
     this.vertical();
 
     this.dataBus.man.vertical = Direction.Down;
+    this.dataBus.man.point.x = this.x;
+    this.dataBus.man.point.y = this.y;
   }
   /**
    * 地板碰撞

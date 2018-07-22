@@ -39,6 +39,7 @@ export default class Main {
   private touchstart(e: TouchEvent) {
     e.preventDefault();
     // const { clientX, clientY } = e.touches[0];
+    // alert(clientX+clientY)
     // console.log(clientX, clientY);
   }
 
@@ -48,6 +49,7 @@ export default class Main {
   private touchmove(e: TouchEvent) {
     e.preventDefault();
     // const { clientX, clientY } = e.touches[0];
+    // alert(clientX+clientY)
     // console.log(clientX, clientY);
   }
 

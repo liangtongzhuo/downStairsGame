@@ -25,7 +25,7 @@ export default class FloorModel {
   }
 
   /**
-   * 根据数据创建显示对象
+   * 根据数据与当前时间创建显示对象
    */
   public createShow(dataBus: DataBus, currentDate: number) {
     if (

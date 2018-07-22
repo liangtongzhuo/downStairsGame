@@ -12,6 +12,10 @@ export default class DataBus {
   public floors: Floor[] = [];
   public man = {
     horizontal: Direction.Stand,
+    point: {
+      x: 0,
+      y: 0
+    },
     vertical: Direction.Down
   };
   public frame = 0;
