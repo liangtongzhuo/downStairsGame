@@ -7,7 +7,8 @@ import DataBus from "../data-status/data-bus";
 import FloorModel from "../model/floor-model";
 
 const dataBus = new DataBus();
-const url = "ws://192.168.1.104:3002?userId=" + Date.now();
+const userId = Date.now();
+const url = "ws://192.168.0.101:3002?userId=" + userId;
 let ws: WebSocket;
 
 const initWs = () => {
@@ -29,6 +30,7 @@ const initWs = () => {
     // 收到地图初始化，转换成模型储存
     if (data.mesName === "initMap") {
       dataBus.netDataFloors = FloorModel.init(data.floors);
+      dataBus.date = data.date;
       return;
     }
   };
@@ -41,6 +43,7 @@ const initWs = () => {
     if (!ws || ws.readyState !== ws.OPEN) return;
 
     const data = {
+      userId,
       x: dataBus.man.point.x / BaseTool.width,
       y: dataBus.man.point.y / BaseTool.height
     };

@@ -21,7 +21,9 @@ export default class DataBus {
   public frame = 0;
   // 网络数据
   public netDataFloors: FloorModel[] = [];
-
+  // 时间
+  public date = 0;
+  
   constructor() {
     return DataBus.instance;
   }

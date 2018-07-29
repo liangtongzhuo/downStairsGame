@@ -79,20 +79,20 @@ export default class Main {
   }
 
   /**
-   * 根据服务器数据生成显示对象
+   * 根据数据生成显示对象
    */
   private create() {
     const currentDate = Date.now();
-    this.dataBus.netDataFloors.forEach(dataFloor => {
-      dataFloor.createShow(this.dataBus, currentDate);
-    });
+    this.dataBus.netDataFloors.forEach(dataFloor =>
+      dataFloor.createShow(this.dataBus, currentDate)
+    );
   }
 
   /**
    * 更新数据状态
    */
   private update() {
-    this.dataBus.floors.forEach(floor => floor.update(this.dataBus));
+    this.dataBus.floors.forEach(floor => floor.update());
     this.man.update();
     this.collisionDetection();
   }
