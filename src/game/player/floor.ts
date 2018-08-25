@@ -1,5 +1,5 @@
 import Sprite from "../base/sprite";
-import DataBus from "../data-status/data-bus";
+import DataBus from "../dataStatus/dataBus";
 // 相关常量设置
 const IMG_SRC = "./img/floor.png";
 // 剪切的宽高
@@ -40,7 +40,7 @@ export default class Floor extends Sprite {
   // 判断边界是否进入对象池
   private judgeAddPool() {
     // 判断是否出屏幕
-    if (this.y < -this.height) {
+    if (this.visible && this.y < -this.height) {
       this.visible = false;
       this.dataBus.floorAddPool(this);
     }

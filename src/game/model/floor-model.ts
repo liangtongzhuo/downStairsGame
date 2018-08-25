@@ -1,5 +1,5 @@
-import { BaseTool } from "../base/base-tool";
-import DataBus from "../data-status/data-bus";
+import { BaseTool } from "../base/baseTool";
+import DataBus from "../dataStatus/dataBus";
 import Floor from "../player/floor";
 
 export default class FloorModel {
@@ -28,20 +28,17 @@ export default class FloorModel {
   /**
    * 根据数据与当前时间创建显示对象
    */
-  public createShow(dataBus: DataBus, currentDate: number) {
-    // 时间差
-    const diffTime = currentDate - dataBus.date;
-    // 计算 y 的位置，每 16.666 毫秒 1 像素
-    const y = this.y - (diffTime / 16.6666) * 1;
-    
+  public createShow(dataBus: DataBus) {
+    if (!dataBus.map.y) return;
+    const y = this.y - dataBus.map.y;
     if (y > 0 && y < BaseTool.height && !this.isUsed) {
+      this.isUsed = true;
       const floor = dataBus.pool.getItemByClass<Floor>("Floor", Floor);
       floor.init(
         this.widthRandom * (BaseTool.width - floor.width),
-        this.y,
+        y,
         this.type
       );
-      this.isUsed = true;
       dataBus.floors.push(floor);
     }
   }

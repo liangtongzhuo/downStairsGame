@@ -1,5 +1,7 @@
-import { BaseTool, Direction, RequestAnimationFrame } from "./base/base-tool";
-import DataBus from "./data-status/data-bus";
+import { BaseTool, Direction, RequestAnimationFrame } from "./base/baseTool";
+import DataBus from "./dataStatus/dataBus";
+import "./http";
+import initMap from "./http/initMap";
 import Man from "./player/man";
 import "./websocket";
 
@@ -24,6 +26,9 @@ export default class Main {
     this.canvas.addEventListener("touchend", this.touchend.bind(this));
 
     this.loop();
+
+    // 请求初始化地图
+    initMap();
   }
 
   /**
@@ -82,9 +87,8 @@ export default class Main {
    * 根据数据生成显示对象
    */
   private create() {
-    const currentDate = Date.now();
     this.dataBus.netDataFloors.forEach(dataFloor =>
-      dataFloor.createShow(this.dataBus, currentDate)
+      dataFloor.createShow(this.dataBus)
     );
   }
 
@@ -92,6 +96,7 @@ export default class Main {
    * 更新数据状态
    */
   private update() {
+    this.dataBus.update();
     this.dataBus.floors.forEach(floor => floor.update());
     this.man.update();
     this.collisionDetection();
@@ -109,8 +114,6 @@ export default class Main {
 
   // 实现游戏帧循环
   private loop() {
-    this.dataBus.frame++;
-
     this.create();
     this.update();
     this.render();

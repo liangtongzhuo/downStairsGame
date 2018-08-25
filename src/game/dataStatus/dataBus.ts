@@ -1,7 +1,7 @@
 /**
  * 全局状态管理器，单例
  */
-import { Direction } from "../base/base-tool";
+import { Direction } from "../base/baseTool";
 import FloorModel from "../model/floor-model";
 import Floor from "../player/floor";
 import Pool from "./pool";
@@ -10,6 +10,10 @@ export default class DataBus {
   private static instance = new DataBus();
   public pool = new Pool();
   public floors: Floor[] = [];
+  public map = {
+    date: 0,
+    y: 0
+  };
   public man = {
     horizontal: Direction.Stand,
     point: {
@@ -21,13 +25,24 @@ export default class DataBus {
   public frame = 0;
   // 网络数据
   public netDataFloors: FloorModel[] = [];
-  // 时间
-  public date = 0;
-  
+
   constructor() {
     return DataBus.instance;
   }
 
+  /**
+   * 更新当前地图 y 值
+   */
+  public update() {
+    this.frame++;
+    // 根据时间计算地图 Y
+    if (this.map.date) {
+      const currentDate = Date.now();
+      const diffTime = currentDate - this.map.date;
+      // 计算 y 的位置，每 16.666 毫秒 1 像素
+      this.map.y = diffTime / 16.6666;
+    }
+  }
   /**
    * 总数据找出对象，加入缓存池
    */

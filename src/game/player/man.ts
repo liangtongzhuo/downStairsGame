@@ -1,6 +1,6 @@
-import { BaseTool, Direction } from "../base/base-tool";
+import { BaseTool, Direction } from "../base/baseTool";
 import Sprite from "../base/sprite";
-import DataBus from "../data-status/data-bus";
+import DataBus from "../dataStatus/dataBus";
 import Floor from "./floor";
 
 // 相关常量设置
