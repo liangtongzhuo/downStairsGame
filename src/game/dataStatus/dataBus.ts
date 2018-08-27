@@ -2,7 +2,7 @@
  * 全局状态管理器，单例
  */
 import { Direction } from "../base/baseTool";
-import FloorModel from "../model/floor-model";
+import FloorModel from "../model/FloorModel";
 import Floor from "../player/floor";
 import Pool from "./pool";
 
@@ -25,6 +25,14 @@ export default class DataBus {
   public frame = 0;
   // 网络数据
   public netDataFloors: FloorModel[] = [];
+  // 其他用户数据
+  public users: {
+    [key: string]: {
+      userId: string;
+      x: number;
+      y: number;
+    };
+  } = {};
 
   constructor() {
     return DataBus.instance;

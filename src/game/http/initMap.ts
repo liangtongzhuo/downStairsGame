@@ -4,7 +4,7 @@
  */
 import axios from "axios";
 import DataBus from "../dataStatus/dataBus";
-import FloorModel from "../model/floor-model";
+import FloorModel from "../model/FloorModel";
 
 const dataBus = new DataBus();
 const userId = Date.now();
