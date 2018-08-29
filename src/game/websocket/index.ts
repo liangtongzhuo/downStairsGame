@@ -6,8 +6,8 @@ import { BaseTool } from "../base/baseTool";
 import DataBus from "../dataStatus/dataBus";
 
 const dataBus = new DataBus();
-const userId = Date.now() + "";
-const url = "ws://127.0.0.1:3002?userId=" + userId;
+console.log(dataBus.userId);
+const url = "ws://127.0.0.1:3002?userId=" + dataBus.userId;
 let ws: WebSocket;
 
 const initWs = () => {
@@ -36,7 +36,7 @@ const initWs = () => {
     // ws 未连接直接返回
     if (!ws || ws.readyState !== ws.OPEN) return;
     const data = {
-      userId,
+      userId: dataBus.userId,
       x: dataBus.man.point.x / BaseTool.width,
       y: dataBus.man.point.y / BaseTool.height
     };

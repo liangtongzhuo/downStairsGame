@@ -14,6 +14,7 @@ export default class DataBus {
     date: 0,
     y: 0
   };
+
   public man = {
     horizontal: Direction.Stand,
     point: {
@@ -33,7 +34,8 @@ export default class DataBus {
       y: number;
     };
   } = {};
-
+  // userId
+  public userId = Date.now() + "";
   constructor() {
     return DataBus.instance;
   }
