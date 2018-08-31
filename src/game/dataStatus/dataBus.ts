@@ -3,13 +3,15 @@
  */
 import { Direction } from "../base/baseTool";
 import FloorModel from "../model/FloorModel";
-import Floor from "../player/floor";
+import Floor from "../player/Floor";
+import OtherMan from "../player/OtherMan";
 import Pool from "./pool";
 
 export default class DataBus {
   private static instance = new DataBus();
   public pool = new Pool();
   public floors: Floor[] = [];
+  // 地图坐标
   public map = {
     date: 0,
     y: 0
@@ -34,6 +36,10 @@ export default class DataBus {
       y: number;
     };
   } = {};
+  // otherMan
+  public otherMans: {
+    [key: string]: OtherMan;
+  } = {};
   // userId
   public userId = Date.now() + "";
   constructor() {
@@ -57,6 +63,17 @@ export default class DataBus {
    * 总数据找出对象，加入缓存池
    */
   public floorAddPool(floor: Floor) {
+    this.floors.forEach((item, index) => {
+      if (item === floor) {
+        this.floors.splice(index, 1);
+        this.pool.recover("Floor", floor);
+      }
+    });
+  }
+  /**
+   * TODO 总数据找出对象，加入缓存池
+   */
+  public otherManAddPool(floor: Floor) {
     this.floors.forEach((item, index) => {
       if (item === floor) {
         this.floors.splice(index, 1);

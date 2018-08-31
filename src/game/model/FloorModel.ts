@@ -1,6 +1,6 @@
 import { BaseTool } from "../base/baseTool";
 import DataBus from "../dataStatus/dataBus";
-import Floor from "../player/floor";
+import Floor from "../player/Floor";
 
 export default class FloorModel {
   // 工厂方法，生成数据模型
@@ -26,7 +26,7 @@ export default class FloorModel {
   }
 
   /**
-   * 根据数据与当前时间创建显示对象
+   * 根据数据与当前时间创建显示地板对象
    */
   public createShow(dataBus: DataBus) {
     if (!dataBus.map.y) return;

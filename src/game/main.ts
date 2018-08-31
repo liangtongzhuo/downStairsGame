@@ -2,7 +2,8 @@ import { BaseTool, Direction, RequestAnimationFrame } from "./base/baseTool";
 import DataBus from "./dataStatus/dataBus";
 import "./http";
 import initMap from "./http/initMap";
-import Man from "./player/man";
+import Man from "./player/Man";
+import OtherMan from "./player/OtherMan";
 import "./websocket";
 
 /**
@@ -69,7 +70,6 @@ export default class Main {
     } else {
       this.dataBus.man.horizontal = Direction.Right;
     }
-    // console.log(clientX, clientY);
   }
 
   /**
@@ -90,6 +90,20 @@ export default class Main {
     this.dataBus.netDataFloors.forEach(dataFloor =>
       dataFloor.createShow(this.dataBus)
     );
+    // 创建或更新角色，准备抽出来
+    for (const userId in this.dataBus.users) {
+      if (this.dataBus.users.hasOwnProperty(userId)) {
+        const otherMan = this.dataBus.otherMans[userId];
+        if (!otherMan) {
+          this.dataBus.otherMans[userId] = this.dataBus.pool.getItemByClass<
+            OtherMan
+          >("OtherMan", OtherMan);
+        }
+        const user = this.dataBus.users[userId];
+        this.dataBus.otherMans[userId].x = user.x * BaseTool.width;
+        this.dataBus.otherMans[userId].y = user.y - this.dataBus.map.y;
+      }
+    }
   }
 
   /**
@@ -109,6 +123,13 @@ export default class Main {
   private render() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.dataBus.floors.forEach(floor => floor.drawToCanvas(this.ctx));
+    // 准备抽出来改成渐渐接近
+    for (const userId in this.dataBus.otherMans) {
+      if (this.dataBus.otherMans.hasOwnProperty(userId)) {
+        const otherMan = this.dataBus.otherMans[userId];
+        otherMan.drawToCanvas(this.ctx);
+      }
+    }
     this.man.drawToCanvas(this.ctx);
   }
 

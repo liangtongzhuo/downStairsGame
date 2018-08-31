@@ -1,7 +1,7 @@
 import { BaseTool, Direction } from "../base/baseTool";
 import Sprite from "../base/sprite";
 import DataBus from "../dataStatus/dataBus";
-import Floor from "./floor";
+import Floor from "./Floor";
 
 // 相关常量设置
 const IMG_SRC = "./img/man.png";

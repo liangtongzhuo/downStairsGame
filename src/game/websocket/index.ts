@@ -6,8 +6,7 @@ import { BaseTool } from "../base/baseTool";
 import DataBus from "../dataStatus/dataBus";
 
 const dataBus = new DataBus();
-console.log(dataBus.userId);
-const url = "ws://127.0.0.1:3002?userId=" + dataBus.userId;
+const url = `ws://${window.location.hostname}:3002?userId=${dataBus.userId}`;
 let ws: WebSocket;
 
 const initWs = () => {
@@ -26,7 +25,6 @@ const initWs = () => {
     if (data.actionName === "user") {
       dataBus.users = data.users;
     }
-    console.log(dataBus.users);
   };
 
   /**
@@ -38,7 +36,7 @@ const initWs = () => {
     const data = {
       userId: dataBus.userId,
       x: dataBus.man.point.x / BaseTool.width,
-      y: dataBus.man.point.y / BaseTool.height
+      y: dataBus.man.point.y + dataBus.map.y
     };
 
     ws.send(JSON.stringify(data));
