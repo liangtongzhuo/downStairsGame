@@ -4,6 +4,7 @@
  */
 import { BaseTool } from "../base/baseTool";
 import DataBus from "../dataStatus/dataBus";
+import OtherManModel from "../model/OtherManModel";
 
 const dataBus = new DataBus();
 const url = `ws://${window.location.hostname}:3002?userId=${dataBus.userId}`;
@@ -33,13 +34,10 @@ const initWs = () => {
   setInterval(() => {
     // ws 未连接直接返回
     if (!ws || ws.readyState !== ws.OPEN) return;
-    const data = {
-      userId: dataBus.userId,
-      x: dataBus.man.point.x / BaseTool.width,
-      y: dataBus.man.point.y + dataBus.map.y
-    };
-
-    ws.send(JSON.stringify(data));
+    const x = dataBus.man.point.x / BaseTool.width;
+    const y = dataBus.man.point.y + dataBus.map.y;
+    const otherManModel = new OtherManModel(dataBus.userId, x, y);
+    ws.send(JSON.stringify(otherManModel));
   }, 30);
 
   /**

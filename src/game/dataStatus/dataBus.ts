@@ -3,6 +3,7 @@
  */
 import { Direction } from "../base/baseTool";
 import FloorModel from "../model/FloorModel";
+import OtherManModel from "../model/OtherManModel";
 import Floor from "../player/Floor";
 import OtherMan from "../player/OtherMan";
 import Pool from "./pool";
@@ -30,11 +31,7 @@ export default class DataBus {
   public netDataFloors: FloorModel[] = [];
   // 其他用户数据
   public users: {
-    [key: string]: {
-      userId: string;
-      x: number;
-      y: number;
-    };
+    [key: string]: OtherManModel;
   } = {};
   // otherMan
   public otherMans: {
