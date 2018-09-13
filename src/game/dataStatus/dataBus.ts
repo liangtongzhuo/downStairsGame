@@ -53,7 +53,7 @@ export default class DataBus {
       const currentDate = Date.now();
       const diffTime = currentDate - this.map.date;
       // 计算 y 的位置，每 16.666 毫秒 1 像素
-      this.map.y = diffTime / 16.6666;
+      this.map.y = diffTime / 16.66666;
     }
   }
   /**

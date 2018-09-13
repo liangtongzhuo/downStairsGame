@@ -11,7 +11,7 @@ export default class OtherManModel {
    */
   public static createOtherManOrUpdate(dataBus: DataBus) {
     for (const userId in dataBus.users) {
-      if (dataBus.users.hasOwnProperty(userId)) {
+      if (dataBus.users.hasOwnProperty(userId) && userId !== dataBus.userId) {
         const otherMan = dataBus.otherMans[userId];
         if (!otherMan) {
           dataBus.otherMans[userId] = dataBus.pool.getItemByClass<OtherMan>(

@@ -104,7 +104,7 @@ export default class Main {
     for (const userId in this.dataBus.otherMans) {
       if (this.dataBus.otherMans.hasOwnProperty(userId)) {
         const otherMan = this.dataBus.otherMans[userId];
-        otherMan.update();
+        if (otherMan) otherMan.update();
       }
     }
     this.collisionDetection();

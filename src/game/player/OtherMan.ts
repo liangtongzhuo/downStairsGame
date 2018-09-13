@@ -9,12 +9,12 @@ const HEIGHT = 64;
 
 export default class OtherMan extends Sprite {
   public frame = 0;
-  public horizontal: Direction = Direction.Stand;
   public point: {
     x: 0;
     y: 0;
   };
-  public vertical: Direction.Down;
+  public vertical: Direction;
+  // public horizontal: Direction = Direction.Stand;
   private xSpeed = 3;
   private ySpeed = 2;
   private xNear = 0;
@@ -69,17 +69,34 @@ export default class OtherMan extends Sprite {
     const yDistance = yNear < this.ySpeed ? yNear : this.ySpeed;
     this.y = yDistance + this.yNear;
     this.yNear = this.y;
+
+    console.log(yDistance, yDistance < -1.1, yDistance > -0.9);
+    if (yDistance < -1.15) this.vertical = Direction.Top;
+    else if (yDistance > -0.85) this.vertical = Direction.Down;
+    else if (xDistance < 0) this.vertical = Direction.Left;
+    else if (xDistance > 0) this.vertical = Direction.Right;
   }
   /**
    * 水平移动
    */
   private horizontalFun() {
-    console.log();
+    if (this.vertical === Direction.Left) {
+      if (this.frame === 10) this.sx = 3 * WIDTH;
+      if (this.frame === 20) this.sx = 4 * WIDTH;
+    } else if (this.vertical === Direction.Right) {
+      if (this.frame === 10) this.sx = 5 * WIDTH;
+      if (this.frame === 20) this.sx = 6 * WIDTH;
+    }
   }
   /**
    * 上下移动
    */
   private verticalFun() {
-    console.log();
+    if (this.vertical === Direction.Top) {
+      this.sx = 2 * WIDTH;
+      // 向下
+    } else if (this.vertical === Direction.Down) {
+      this.sx = 1 * WIDTH;
+    }
   }
 }
